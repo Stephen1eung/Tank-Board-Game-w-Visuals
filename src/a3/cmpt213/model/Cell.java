@@ -1,22 +1,22 @@
 package a3.cmpt213.model;
 
 public class Cell {
-    private boolean isUnknown = true;
-    private boolean isHit = false;
+    public enum States {
+        UNKNOWN,
+        MISS,
+        HIT
+    }
+    private States state;
 
-    public boolean isUnknown() {
-        return isUnknown;
+    public Cell(States state) {
+        this.state = state;
     }
 
-    public void setUnknown(boolean unknown) {
-        isUnknown = unknown;
+    public States getState() {
+        return state;
     }
 
-    public boolean isHit() {
-        return isHit;
-    }
-
-    public void setHit(boolean hit) {
-        isHit = hit;
+    public void setState(States state) {
+        this.state = state;
     }
 }

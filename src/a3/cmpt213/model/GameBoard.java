@@ -3,20 +3,20 @@ package a3.cmpt213.model;
 import java.util.*;
 
 public class GameBoard {
-    private Cell[][] map;
+    private Cell[][] board;
     private Set<Cell> emptyCells = new HashSet<>();
     private int health = 2500;
     private Tank[] tanks;
     private boolean cheats;
 
     public GameBoard(int numTanks, boolean cheats) {
-        this.map = new Cell[10][10];
+        this.board = new Cell[10][10];
         this.tanks = new Tank[numTanks];
         this.cheats = cheats;
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {
-                map[i][j] = new Cell();
-                emptyCells.add(map[i][j]);
+                board[i][j] = new Cell(Cell.States.UNKNOWN);
+                emptyCells.add(board[i][j]);
             }
         }
         for (int i = 0; i < numTanks; i++) {
@@ -24,7 +24,7 @@ public class GameBoard {
             if (tankCells == null) {
                 System.exit(-1);
             }
-            tanks[i] = new Tank(tankCells);
+            tanks[i] = new Tank(tankCells, (char) ('A' + i));
         }
     }
 
@@ -39,15 +39,15 @@ public class GameBoard {
         do {
             xPos = (int) (Math.random() * 9);
             yPos = (int) (Math.random() * 9);
-        } while (this.emptyCells.contains(map[xPos][yPos]));
-        shape.add(map[xPos][yPos]);
-        emptyCells.remove(map[xPos][yPos]);
+        } while (this.emptyCells.contains(board[xPos][yPos]));
+        shape.add(board[xPos][yPos]);
+        emptyCells.remove(board[xPos][yPos]);
         List<Integer[]> possibleCells = new ArrayList<>();
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
                 int newX = xPos + directions[j][0];
                 int newY = yPos + directions[j][1];
-                if (newX >= 0 && newX < 10 && newY >= 0 && newY< 10 && emptyCells.contains(map[newX][newY])) {
+                if (newX >= 0 && newX < 10 && newY >= 0 && newY< 10 && emptyCells.contains(board[newX][newY])) {
                     possibleCells.add(new Integer[]{newX, newY});
                 }
             }
@@ -57,8 +57,8 @@ public class GameBoard {
             int indexToAdd = (int) (Math.random() * possibleCells.size());
             xPos = possibleCells.get(indexToAdd)[0];
             yPos = possibleCells.get(indexToAdd)[1];
-            shape.add(map[xPos][yPos]);
-            emptyCells.remove(map[xPos][yPos]);
+            shape.add(board[xPos][yPos]);
+            emptyCells.remove(board[xPos][yPos]);
             possibleCells.remove(indexToAdd);
         }
         return shape;
@@ -72,16 +72,19 @@ public class GameBoard {
 
     private void userFire(int x, int y) {
         for (Tank tank : this.tanks) {
-            if (tank.isTank(map[x][y])) {
-                tank.hit(map[x][y]);
-                break;
+            if (tank.isTank(board[x][y])) {
+                tank.hit(board[x][y]);
+                return;
             }
         }
+        board[x][y].setState(Cell.States.MISS);
     }
 
     public int getHealth() {
         return health;
     }
 
-    // TODO: getBoard() should return enum instead of string - more interface agnostic
+    public Cell[][] getBoard() {
+        return board;
+    }
 }

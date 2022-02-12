@@ -7,12 +7,10 @@ public class GameBoard {
     private Set<Cell> emptyCells = new HashSet<>();
     private int health = 2500;
     private Tank[] tanks;
-    private boolean cheats;
 
-    public GameBoard(int numTanks, boolean cheats) {
+    public GameBoard(int numTanks) {
         this.board = new Cell[10][10];
         this.tanks = new Tank[numTanks];
-        this.cheats = cheats;
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {
                 board[i][j] = new Cell(Cell.States.UNKNOWN);
@@ -64,10 +62,13 @@ public class GameBoard {
         return shape;
     }
 
-    private void tankFire() {
+    private int tankFire() {
+        int totalDmg = 0;
         for (Tank tank : this.tanks) {
-            this.health -= tank.getDamage();
+            totalDmg += tank.getDamage();
         }
+        this.health -= totalDmg;
+        return totalDmg;
     }
 
     private void userFire(int x, int y) {
@@ -86,5 +87,9 @@ public class GameBoard {
 
     public Cell[][] getBoard() {
         return board;
+    }
+
+    public Tank[] getTanks() {
+        return tanks;
     }
 }

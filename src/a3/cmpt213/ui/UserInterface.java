@@ -10,6 +10,7 @@ import java.util.Scanner;
 
 public class UserInterface {
     private static final List<Character> letters = new ArrayList<>(List.of('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'));
+    private static final String WELCOME = "Welcome to S&S Fortress Defense\n";
 
     public static int[] getInput() {
         Scanner scanner = new Scanner(System.in);
@@ -59,6 +60,9 @@ public class UserInterface {
             }
             result.append("\n");
         }
+        if (!fog) {
+            result.append("Lowercase letters indicate where tanks were shot\n");
+        }
         System.out.println(result);
     }
 
@@ -88,5 +92,13 @@ public class UserInterface {
             }
         }
         return result;
+    }
+
+    public static void displayWelcome() {
+        System.out.println(WELCOME);
+    }
+
+    public static void displayHealth(int health) {
+        System.out.println("Fortress Structure Left: " + health);
     }
 }

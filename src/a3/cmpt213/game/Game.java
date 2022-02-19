@@ -43,13 +43,22 @@ public class Game {
         UserInterface.displayWelcome();
         if (cheats) {
             UserInterface.displayBoard(gameBoard.getBoard(), gameBoard.getTanks(), !cheats);
+            UserInterface.displayHealth(gameBoard.getHealth());
         }
         boolean running = true;
         while (running) {
-            UserInterface.displayBoard(gameBoard.getBoard(), gameBoard.getTanks(), false);
+            UserInterface.displayBoard(gameBoard.getBoard(), gameBoard.getTanks(), true);
+            UserInterface.displayHealth(gameBoard.getHealth());
             gameBoard.userFire(UserInterface.getInput());
-            // TODO: game sequence: display board & health, get input, user fire, tank fire, check if game is over
+            gameBoard.tankFire();
+            if(gameBoard.getHealth() <= 0){
+                UserInterface.displayBoard(gameBoard.getBoard(), gameBoard.getTanks(), false);
+                UserInterface.displayLose();
+                System.exit(FAILURE);
+            }
+
+            // TODO: game sequence: check if game is over
         }
-        // TODO: end of game: display board again, check winner, display message (maybe here, maybe when checking game over)
+        // TODO: end of game: check winner, display message
     }
 }

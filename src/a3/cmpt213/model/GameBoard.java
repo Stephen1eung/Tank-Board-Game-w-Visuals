@@ -1,11 +1,14 @@
 package a3.cmpt213.model;
 
+import a3.cmpt213.ui.UserInterface;
+
 import java.util.*;
 
 public class GameBoard {
     private Cell[][] board;
     private Set<Cell> emptyCells = new HashSet<>();
-    private int health = 2500;
+    // TODO: change health back to 2500
+    private int health = 50;
     private Tank[] tanks;
 
     public GameBoard(int numTanks) {
@@ -62,7 +65,7 @@ public class GameBoard {
         return shape;
     }
 
-    private int tankFire() {
+    public int tankFire() {
         int totalDmg = 0;
         for (Tank tank : this.tanks) {
             totalDmg += tank.getDamage();
@@ -75,9 +78,11 @@ public class GameBoard {
         for (Tank tank : this.tanks) {
             if (tank.isTank(board[coordinates[1]][coordinates[0]])) {
                 tank.hit(board[coordinates[1]][coordinates[0]]);
+                UserInterface.displayHit();
                 return;
             }
         }
+        UserInterface.displayMiss();
         board[coordinates[1]][coordinates[0]].setState(Cell.States.MISS);
     }
 

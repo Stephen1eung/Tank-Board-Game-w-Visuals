@@ -11,6 +11,8 @@ import java.util.Scanner;
 public class UserInterface {
     private static final List<Character> letters = new ArrayList<>(List.of('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'));
     private static final String WELCOME = "Welcome to S&S Fortress Defense\n";
+    private static final String HIT = "Hit!";
+    private static final String MISS = "Miss";
 
     public static int[] getInput() {
         int[] coordinates = new int[2];
@@ -27,8 +29,6 @@ public class UserInterface {
         yPos = Integer.parseInt(userInput.substring(1));
         coordinates[0] = xPos;
         coordinates[1] = yPos - 1;
-        display(String.valueOf(xPos));
-        display(String.valueOf(yPos));
         return coordinates;
     }
 
@@ -75,7 +75,7 @@ public class UserInterface {
             result.append("\n");
         }
         if (!fog) {
-            result.append("Lowercase letters indicate where tanks were shot\n");
+            result.append("Lowercase letters indicate where tanks are hit\n");
         }
         System.out.println(result);
     }
@@ -103,21 +103,28 @@ public class UserInterface {
             }
             case HIT -> {
                 result = Character.toLowerCase(tankId);
-                System.out.println("HIT!");
             }
         }
         return result;
     }
 
-    public static void displayWelcome() {
-        System.out.println(WELCOME);
+    public static void displayWelcome() {System.out.println(WELCOME);}
+
+    public static void displayHit() {System.out.println(HIT);}
+
+    public static void displayMiss() {System.out.println(MISS);}
+
+    //TODO: remove display
+    public static void display(String message) {System.out.println(message);}
+
+    public static void displayHealth(int health) {System.out.println("Fortress Structure Left: " + health);}
+
+    public static void displayLose() {
+        System.out.println("We Gotta Retreat Captain! We Lost!\n");
+        System.out.println("-----GAME OVER-----\n");
+        System.out.println("-----EXITING-----\n");
     }
 
-    public static void display(String message) {
-        System.out.println(message);
-    }
-
-    public static void displayHealth(int health) {
-        System.out.println("Fortress Structure Left: " + health);
+    public static void displayWin() {
     }
 }

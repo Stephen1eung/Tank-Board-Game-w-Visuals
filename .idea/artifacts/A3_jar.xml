@@ -1,0 +1,9 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="A3:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/A3_jar</output-path>
+    <root id="archive" name="A3.jar">
+      <element id="module-output" name="A3" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/google/code/gson/gson/2.8.2/gson-2.8.2.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

@@ -13,6 +13,9 @@ public class UserInterface {
     private static final String WELCOME = "Welcome to S&S Fortress Defense\n";
 
     public static int[] getInput() {
+        int[] coordinates = new int[2];
+        int xPos;
+        int yPos;
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter your move:");
         String userInput = scanner.nextLine().toUpperCase(Locale.ROOT);
@@ -20,7 +23,13 @@ public class UserInterface {
             System.out.println("Sorry, that's not a valid move. Please enter a coordinate.");
             userInput = scanner.nextLine().toUpperCase(Locale.ROOT);
         }
-        return parseInput(userInput);
+        xPos = letters.indexOf(userInput.charAt(0));
+        yPos = Integer.parseInt(userInput.substring(1));
+        coordinates[0] = xPos;
+        coordinates[1] = yPos - 1;
+        display(String.valueOf(xPos));
+        display(String.valueOf(yPos));
+        return coordinates;
     }
 
     private static boolean isValidInput(String input) {
@@ -39,24 +48,29 @@ public class UserInterface {
         }
     }
 
-    private static int[] parseInput(String input) {
-        return new int[]{letters.indexOf(input.charAt(0)), Integer.parseInt(input.substring(1))};
-    }
-
     public static void displayBoard(Cell[][] board, Tank[] tanks, boolean fog) {
         StringBuilder result = new StringBuilder("Game Board:\n\t  ");
+        result.append("  ");
         for (int i = 0; i < 10; i++) {
             result.append(letters.get(i));
-            result.append(" ");
+            result.append("  ");
         }
         result.append("\n");
         for (int i = 0; i < 10; i++) {
-            result.append("\t");
-            result.append(i + 1);
-            result.append(" ");
+            if(i < 9){
+                result.append("\t");
+                result.append(" ");
+                result.append(i + 1);
+                result.append("  ");
+            }
+            else{
+                result.append("\t");
+                result.append(i + 1);
+                result.append("  ");
+            }
             for (int j = 0; j < 10; j++) {
                 result.append(cellToSymbol(board[i][j], tanks, fog));
-                result.append(" ");
+                result.append("  ");
             }
             result.append("\n");
         }
@@ -89,6 +103,7 @@ public class UserInterface {
             }
             case HIT -> {
                 result = Character.toLowerCase(tankId);
+                System.out.println("HIT!");
             }
         }
         return result;
@@ -96,6 +111,10 @@ public class UserInterface {
 
     public static void displayWelcome() {
         System.out.println(WELCOME);
+    }
+
+    public static void display(String message) {
+        System.out.println(message);
     }
 
     public static void displayHealth(int health) {

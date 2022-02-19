@@ -37,7 +37,7 @@ public class GameBoard {
         do {
             xPos = (int) (Math.random() * 9);
             yPos = (int) (Math.random() * 9);
-        } while (this.emptyCells.contains(board[xPos][yPos]));
+        } while (!this.emptyCells.contains(board[xPos][yPos]));
         shape.add(board[xPos][yPos]);
         emptyCells.remove(board[xPos][yPos]);
         List<Integer[]> possibleCells = new ArrayList<>();
@@ -71,14 +71,14 @@ public class GameBoard {
         return totalDmg;
     }
 
-    private void userFire(int x, int y) {
+    public void userFire(int[] coordinates) {
         for (Tank tank : this.tanks) {
-            if (tank.isTank(board[x][y])) {
-                tank.hit(board[x][y]);
+            if (tank.isTank(board[coordinates[1]][coordinates[0]])) {
+                tank.hit(board[coordinates[1]][coordinates[0]]);
                 return;
             }
         }
-        board[x][y].setState(Cell.States.MISS);
+        board[coordinates[1]][coordinates[0]].setState(Cell.States.MISS);
     }
 
     public int getHealth() {

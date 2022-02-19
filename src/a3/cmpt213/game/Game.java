@@ -46,6 +46,8 @@ public class Game {
         }
         boolean running = true;
         while (running) {
+            UserInterface.displayBoard(gameBoard.getBoard(), gameBoard.getTanks(), false);
+            gameBoard.userFire(UserInterface.getInput());
             // TODO: game sequence: display board & health, get input, user fire, tank fire, check if game is over
         }
         // TODO: end of game: display board again, check winner, display message (maybe here, maybe when checking game over)

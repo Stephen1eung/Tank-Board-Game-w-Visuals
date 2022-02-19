@@ -1,7 +1,10 @@
 package a3.cmpt213.game;
 
 import a3.cmpt213.model.GameBoard;
+import a3.cmpt213.model.Tank;
 import a3.cmpt213.ui.UserInterface;
+
+import java.util.Arrays;
 
 public class Game {
     private static final int DEFAULT_NUM_TANKS = 5;
@@ -47,18 +50,20 @@ public class Game {
         }
         boolean running = true;
         while (running) {
-            UserInterface.displayBoard(gameBoard.getBoard(), gameBoard.getTanks(), true);
+            UserInterface.displayBoard(gameBoard.getBoard(), gameBoard.getTanks(), false);
             UserInterface.displayHealth(gameBoard.getHealth());
             gameBoard.userFire(UserInterface.getInput());
+            if(numTanks * 5 == Tank.getCellsHitSize()){
+                UserInterface.displayBoard(gameBoard.getBoard(), gameBoard.getTanks(), false);
+                UserInterface.displayWin();
+                System.exit(FAILURE);
+            }
             gameBoard.tankFire();
             if(gameBoard.getHealth() <= 0){
                 UserInterface.displayBoard(gameBoard.getBoard(), gameBoard.getTanks(), false);
                 UserInterface.displayLose();
                 System.exit(FAILURE);
             }
-
-            // TODO: game sequence: check if game is over
         }
-        // TODO: end of game: check winner, display message
     }
 }

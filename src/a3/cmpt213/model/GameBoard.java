@@ -1,14 +1,12 @@
 package a3.cmpt213.model;
 
 import a3.cmpt213.ui.UserInterface;
-
 import java.util.*;
 
 public class GameBoard {
     private Cell[][] board;
     private Set<Cell> emptyCells = new HashSet<>();
-    // TODO: change health back to 2500
-    private int health = 50;
+    private int health = 2500;
     private Tank[] tanks;
 
     public GameBoard(int numTanks) {

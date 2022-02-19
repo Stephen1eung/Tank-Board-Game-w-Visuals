@@ -11,8 +11,8 @@ import java.util.Scanner;
 public class UserInterface {
     private static final List<Character> letters = new ArrayList<>(List.of('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'));
     private static final String WELCOME = "Welcome to S&S Fortress Defense\n";
-    private static final String HIT = "Hit!";
-    private static final String MISS = "Miss";
+    private static final String HIT = "Hit!\n";
+    private static final String MISS = "Miss\n";
 
     public static int[] getInput() {
         int[] coordinates = new int[2];
@@ -121,10 +121,15 @@ public class UserInterface {
 
     public static void displayLose() {
         System.out.println("We Gotta Retreat Captain! We Lost!\n");
-        System.out.println("-----GAME OVER-----\n");
-        System.out.println("-----EXITING-----\n");
+        displayExit();
     }
 
     public static void displayWin() {
+        System.out.println("Congrats Captain, All Tanks are destroyed You Won!\n");
+        displayExit();
+    }
+    private static void displayExit(){
+        System.out.println("-----GAME OVER-----");
+        System.out.println("------EXITING------\n");
     }
 }

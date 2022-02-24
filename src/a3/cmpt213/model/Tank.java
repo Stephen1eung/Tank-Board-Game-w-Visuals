@@ -33,6 +33,8 @@ public class Tank {
         return damageLevels[this.health];
     }
 
+    public int getHealth(){return this.health;}
+
     public boolean isTank(Cell cell) {return cells.contains(cell);}
 
     public static int getCellsHitSize() {return cellsHit.size();}

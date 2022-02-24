@@ -68,20 +68,21 @@ public class GameBoard {
         for (Tank tank : this.tanks) {
             totalDmg += tank.getDamage();
         }
+        UserInterface.displayTankArray(this.tanks);
         this.health -= totalDmg;
         return totalDmg;
     }
 
     public void userFire(int[] coordinates) {
         for (Tank tank : this.tanks) {
-            if (tank.isTank(board[coordinates[1]][coordinates[0]])) {
-                tank.hit(board[coordinates[1]][coordinates[0]]);
+            if (tank.isTank(board[coordinates[0]][coordinates[1]])) {
+                tank.hit(board[coordinates[0]][coordinates[1]]);
                 UserInterface.displayHit();
                 return;
             }
         }
         UserInterface.displayMiss();
-        board[coordinates[1]][coordinates[0]].setState(Cell.States.MISS);
+        board[coordinates[0]][coordinates[1]].setState(Cell.States.MISS);
     }
 
     public int getHealth() {

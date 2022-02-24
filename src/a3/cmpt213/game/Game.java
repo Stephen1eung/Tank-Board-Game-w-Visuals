@@ -9,10 +9,12 @@ import java.util.Arrays;
 public class Game {
     private static final int DEFAULT_NUM_TANKS = 5;
     private static final int FAILURE = -1;
+    public static boolean cheats = false;
+    public static boolean isCheats() {return cheats;}
+    public static void setCheats(boolean cheats) {Game.cheats = cheats;}
 
     public static void main(String[] args) {
         int numTanks = DEFAULT_NUM_TANKS;
-        boolean cheats = false;
 
         switch (args.length) {
             case (0):
@@ -29,7 +31,7 @@ public class Game {
                 try {
                     numTanks = Integer.parseInt(args[0]);
                     if (args[1].equalsIgnoreCase("--cheats")) {
-                        cheats = true;
+                        setCheats(true);
                     }
                 } catch (NumberFormatException e) {
                     System.out.println("Sorry, I didn't understand the number of tanks you wanted to use\n");
@@ -50,7 +52,7 @@ public class Game {
         }
         boolean running = true;
         while (running) {
-            UserInterface.displayBoard(gameBoard.getBoard(), gameBoard.getTanks(), false);
+            UserInterface.displayBoard(gameBoard.getBoard(), gameBoard.getTanks(), true);
             UserInterface.displayHealth(gameBoard.getHealth());
             gameBoard.userFire(UserInterface.getInput());
             if(numTanks * 5 == Tank.getCellsHitSize()){

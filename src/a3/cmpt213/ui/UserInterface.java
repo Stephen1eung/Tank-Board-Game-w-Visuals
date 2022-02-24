@@ -1,5 +1,6 @@
 package a3.cmpt213.ui;
 
+import a3.cmpt213.game.Game;
 import a3.cmpt213.model.Cell;
 import a3.cmpt213.model.Tank;
 
@@ -50,24 +51,16 @@ public class UserInterface {
 
     public static void displayBoard(Cell[][] board, Tank[] tanks, boolean fog) {
         StringBuilder result = new StringBuilder("Game Board:\n\t  ");
-        result.append("  ");
+        result.append(" ");
         for (int i = 0; i < 10; i++) {
-            result.append(letters.get(i));
+            result.append(i + 1);
             result.append("  ");
         }
         result.append("\n");
         for (int i = 0; i < 10; i++) {
-            if(i < 9){
-                result.append("\t");
-                result.append(" ");
-                result.append(i + 1);
-                result.append("  ");
-            }
-            else{
-                result.append("\t");
-                result.append(i + 1);
-                result.append("  ");
-            }
+            result.append("\t");
+            result.append(letters.get(i));
+            result.append("  ");
             for (int j = 0; j < 10; j++) {
                 result.append(cellToSymbol(board[i][j], tanks, fog));
                 result.append("  ");
@@ -102,10 +95,22 @@ public class UserInterface {
                 result = ' ';
             }
             case HIT -> {
-                result = Character.toLowerCase(tankId);
+                if(Game.isCheats()){
+                    result = Character.toLowerCase(tankId);
+                } else{
+                    result = 'X';
+                }
             }
         }
         return result;
+    }
+
+    public static void displayTankArray(Tank[] tanks) {
+        int i = 1;
+        for (Tank tank : tanks) {
+            System.out.println("Alive tank #" + i + " of " + tanks.length + " shot you for " + tank.getDamage() + "!");
+            i++;
+        }
     }
 
     public static void displayWelcome() {System.out.println(WELCOME);}

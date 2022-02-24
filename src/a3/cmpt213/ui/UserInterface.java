@@ -9,6 +9,11 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Scanner;
 
+/**
+ * UserInterface class is used for accepting/validating user
+ * inputs as well as display users the board/game status
+ */
+
 public class UserInterface {
     private static final List<Character> letters = new ArrayList<>(List.of('A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J'));
     private static final String WELCOME = "Welcome to S&S Fortress Defense\n";

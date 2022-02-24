@@ -3,6 +3,11 @@ package a3.cmpt213.model;
 import a3.cmpt213.ui.UserInterface;
 import java.util.*;
 
+/**
+ * GameBoard class is used for generating board/tank shapes,
+ * random placement of tanks, as well as handling User/Tank damage
+ */
+
 public class GameBoard {
     private Cell[][] board;
     private Set<Cell> emptyCells = new HashSet<>();
@@ -96,4 +101,11 @@ public class GameBoard {
     public Tank[] getTanks() {
         return tanks;
     }
+/*
+    public Tank[] getTanks(Set<Tank> tanks) {
+        Iterator<Tank> itr = tanks.iterator();
+        return tanks;
+    }
+
+ */
 }

@@ -4,7 +4,10 @@ import a3.cmpt213.model.GameBoard;
 import a3.cmpt213.model.Tank;
 import a3.cmpt213.ui.UserInterface;
 
-import java.util.Arrays;
+/**
+ * Game class used for accepting command line arguements such as number of tanks and '--cheats'.
+ * Also validates win/lose conditions, exiting when conditions are met.
+ */
 
 public class Game {
     private static final int DEFAULT_NUM_TANKS = 5;
@@ -50,8 +53,8 @@ public class Game {
             UserInterface.displayBoard(gameBoard.getBoard(), gameBoard.getTanks(), !cheats);
             UserInterface.displayHealth(gameBoard.getHealth());
         }
-        boolean running = true;
-        while (running) {
+
+        while (true) {
             UserInterface.displayBoard(gameBoard.getBoard(), gameBoard.getTanks(), true);
             UserInterface.displayHealth(gameBoard.getHealth());
             gameBoard.userFire(UserInterface.getInput());

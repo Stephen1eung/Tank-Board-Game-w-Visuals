@@ -2,9 +2,13 @@ package a3.cmpt213.model;
 
 import a3.cmpt213.ui.UserInterface;
 
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
+
+/**
+ * Tank class representing each tank with it's unique
+ * damage, health, id, and set of cells
+ */
 
 public class Tank {
     private static final Set<Cell> cellsHit = new HashSet<>();
@@ -27,13 +31,8 @@ public class Tank {
     }
 
     public int getDamage() {
-        if(this.health == 5){
-            return 0;
-        }
         return damageLevels[this.health];
     }
-
-    public int getHealth(){return this.health;}
 
     public boolean isTank(Cell cell) {return cells.contains(cell);}
 

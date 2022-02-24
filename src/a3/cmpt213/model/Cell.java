@@ -1,5 +1,9 @@
 package a3.cmpt213.model;
 
+/**
+ * Cell class allows states to be mutated and accessed
+ */
+
 public class Cell {
     public enum States {
         UNKNOWN,

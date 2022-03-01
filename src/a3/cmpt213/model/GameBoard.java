@@ -101,11 +101,11 @@ public class GameBoard {
     public Tank[] getTanks() {
         return tanks;
     }
+
 /*
     public Tank[] getTanks(Set<Tank> tanks) {
         Iterator<Tank> itr = tanks.iterator();
         return tanks;
     }
-
  */
 }
